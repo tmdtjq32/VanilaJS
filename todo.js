@@ -4,8 +4,18 @@ const toDoForm = document.querySelector(".js-toDoForm"),
 const TO_DO_LIST = "To do list";
 const TO_DO = [];
 
-function saveToDO() {
-    localStorage.setItem(TO_DO_LIST, JSON.stringify(TO_DO));
+function deleteTodo(event) {
+    const btn = event.target;
+    const li = btn.parentNode;
+    toDoList.removeChild(li); // html 리스트 요소 삭제
+    const cleanlist = TO_DO.filter(function (toDo) {
+        return toDo.id !== parseInt(li.id);
+    });
+    saveToDO(cleanlist);
+}
+
+function saveToDO(list) {
+    localStorage.setItem(TO_DO_LIST, JSON.stringify(list));
     // JSON.stringify로 객체를 str타입으로 변환
 }
 function paintTodo(text) {
@@ -14,6 +24,7 @@ function paintTodo(text) {
     const span = document.createElement("span");
     const newId = TO_DO.length + 1;
     delBtn.innerText = "del";
+    delBtn.addEventListener("click", deleteTodo);
     span.innerText = text;
     li.id = newId;
     li.appendChild(span);
@@ -31,7 +42,7 @@ function handleSubmit(event) {
     event.preventDefault();
     const currentValue = toDoinput.value;
     paintTodo(currentValue); // ul에 출력
-    saveToDO(); // localstorage에 저장
+    saveToDO(TO_DO); // localstorage에 저장
     toDoinput.value = "";
 }
 

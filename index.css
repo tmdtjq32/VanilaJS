@@ -1,9 +1,15 @@
-body {
-    background-color: #ecf0f1;
-}
+@import "reset.css";
 
 body {
-   color: #34495e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2c3e50;
+   color: #ecf0f1;
+   top: 50%;
+   left: 50%;
+   margin-top: 300px;
+   margin-left: 300px;
 }
 
 .form,
@@ -13,4 +19,25 @@ body {
 
 .showing {
   display: block;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(50px);
+  }
+  to{
+      opacity: 1;
+      transform:none;
+  }
+}
+
+.bgImage{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  animation: fadeIn 0.5s linear;
 }
